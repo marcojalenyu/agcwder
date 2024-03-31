@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "testsite.py", "use": "@vercel/python", "config": { "maxLambdaSize": "50mb", "pythonVersion": "3.8" } }
+    ],
+    "dependencies": {
+      "opencv-python": "^4.5.3.56",
+      "numpy": "^1.21.2"
+    }
+  }
+  
