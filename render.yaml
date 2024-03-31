@@ -1,0 +1,4 @@
+services:
+  - name: flask-app
+    buildCommand: pip install -r requirements.txt
+    startCommand: python testsite.py
