@@ -1,11 +1,20 @@
 {
-    "version": 2,
     "builds": [
-      { "src": "testsite.py", "use": "@vercel/python", "config": { "maxLambdaSize": "50mb", "pythonVersion": "3.8" } }
+      { 
+        "src": "api/testsite.py", 
+        "use": "@vercel/python"
+      }
+    ],
+    "routes":[
+      {
+        "src":"/(.*)",
+        "dest":"api/testsite.py"
+      }
     ],
     "dependencies": {
-      "opencv-python": "^4.5.3.56",
-      "numpy": "^1.21.2"
+      "flask": "^1.1.2",
+      "numpy": "^1.19.5",
+      "cv2": "^4.5.1"
     }
   }
   
