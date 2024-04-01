@@ -14,14 +14,16 @@
     <div class="website-desc d-flex font-weight-bold mb-4">Simply upload an image and we will enhance the contrast for you!</div>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 text-center">
+            <div class="col-md-6 text-center mb-4">
                 <div class="mb-4 font-weight-bold">Input Image</div>
-                <div>
-                    <form action="/" method="post" enctype="multipart/form-data">
+                <form class="d-flex flex-column justify-content" action="/" method="post" enctype="multipart/form-data">
+                    <div>
                         <input type="file" name="file" accept="image/*" placeholder="image" required>
-                        <button class="btn btn-primary" type="submit">Upload</button>
-                    </form>
-                </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary mt-4 w-25" type="submit">Upload</button>
+                    </div>
+                </form>
             </div>
             <div class="col-md-6 text-center">
                 <div class="mb-4 font-weight-bold">Output Image (Preview)</div>
