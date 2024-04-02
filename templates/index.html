@@ -11,31 +11,33 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark font-weight-bold flex">
         <a class="navbar-brand" href="/">AGCWDer</a>
     </nav>
-    <div class="website-desc d-flex font-weight-bold mb-4">Simply upload an image and we will enhance the contrast for you!</div>
+    <div class="website-desc d-flex font-weight-bold mb-1">Simply upload an image and we will enhance the contrast for you!</div>
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center mb-4">
-                <div class="mb-4 font-weight-bold">Input Image</div>
+                <div class="mb-4 font-weight-bold h4">Input Image</div>
                 <form class="d-flex flex-column justify-content" action="/" method="post" enctype="multipart/form-data">
                     <div>
-                        <input type="file" name="file" accept="image/*" placeholder="image" required>
+                        <img class="img-fluid" id="imgPreview" src="#" alt="">
+                        <input class="my-3" id="imgInput" type="file" name="file" accept="image/*" placeholder="image" required>
                     </div>
                     <div>
-                        <button class="btn btn-primary mt-4 w-25" type="submit">Upload</button>
+                        <button class="btn btn-primary" type="submit">Enhance</button>
                     </div>
                 </form>
             </div>
             <div class="col-md-6 text-center">
-                <div class="mb-4 font-weight-bold">Output Image (Preview)</div>
-                <div class="d-flex flex-column">
+                <div class="mb-4 font-weight-bold h4">Output Image (Preview)</div>
+                <div class="d-flex flex-column mb-4">
                     <div>
                         {% if uploaded %}
                             <img class="img-fluid" src="{{ url_for('static', filename='enhanced.jpg') }}" alt="Enhanced Image">
+                            <div class="my-3">enhanced.jpg</div>
                         {% endif %}
                     </div>
                     <div>
                         {% if uploaded %}
-                            <a href="{{ url_for('download') }}" class="btn btn-primary mt-4">Download</a>
+                            <a href="{{ url_for('download') }}" class="btn btn-primary">Download</a>
                         {% endif %}
                     </div>
                     {% if error %}
@@ -45,5 +47,16 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('imgInput').addEventListener('change', function() {
+            var image = document.getElementById('imgPreview');
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                image.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
 </body>
 </html>

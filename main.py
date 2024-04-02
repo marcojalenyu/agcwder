@@ -4,6 +4,7 @@ import os
 import numpy as np
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24).hex()
 
 # AGCWD algorithm function
 def agcwd(image, w=0.5):
@@ -72,7 +73,7 @@ def home():
             cv2.imwrite('static/enhanced.jpg', enhanced_image)
 
             # Render template with uploaded and enhanced images
-            return render_template('index.html', uploaded=True)
+            return render_template('index.html', uploaded=True, img=img)
 
     return render_template('index.html')
 
