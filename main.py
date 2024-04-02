@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, send_file
 import cv2
 import os
 import numpy as np
+import base64
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24).hex()
@@ -50,6 +51,8 @@ def set_value_channel(color_image, value_channel):
 # Define route for homepage
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    input_image_b64 = None
+    enhanced_image_b64 = None
     if request.method == 'POST':
         # Check if a file was uploaded
         if 'file' not in request.files:
@@ -70,24 +73,13 @@ def home():
             enhanced_image = agcwd(img)
 
             # Save the enhanced image temporarily
-            cv2.imwrite('static/enhanced.jpg', enhanced_image)
+            _, input_image_b64 = cv2.imencode('.png', img)
+            _, enhanced_image_b64 = cv2.imencode('.png', enhanced_image)
 
-            # Render template with uploaded and enhanced images
-            return render_template('index.html', uploaded=True, img=img)
-
-    return render_template('index.html')
-
-# Define route for downloading enhanced image
-@app.route('/download')
-def download():
-    # Make OS path for enhanced image
-    enhanced_image_path = 'static/enhanced.jpg'
-    if os.path.exists(enhanced_image_path):
-        # Send the enhanced image file to the user
-        return send_file(enhanced_image_path, as_attachment=True)
-    else:
-        # If the enhanced image doesn't exist, return a message
-        return "Enhanced image not found."
+            input_image_b64 = base64.b64encode(input_image_b64).decode('utf-8')
+            enhanced_image_b64 = base64.b64encode(enhanced_image_b64).decode('utf-8')
+            
+    return render_template('index.html', input_image=input_image_b64, enhanced_image=enhanced_image_b64)
 
 if __name__ == '__main__':
      app.run(debug=True)
