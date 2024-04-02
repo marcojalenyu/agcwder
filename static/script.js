@@ -74,3 +74,9 @@ document.getElementById('imgInput').addEventListener('change', function() {
     };
     reader.readAsDataURL(file);
 });
+
+const alphaInput = document.getElementById('alpha');
+const alphaValue = document.getElementById('alphaValue');
+alphaInput.addEventListener('input', function() {
+   alphaValue.textContent = alphaInput.value;
+});

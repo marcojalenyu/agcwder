@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24).hex()
 
 # AGCWD algorithm function
-def agcwd(image, w=0.5):
+def agcwd(image, w):
     is_colorful = len(image.shape) >= 3
     img = extract_value_channel(image) if is_colorful else image
     img_pdf = get_pdf(img)
@@ -53,12 +53,15 @@ def set_value_channel(color_image, value_channel):
 def home():
     input_image_b64 = None
     enhanced_image_b64 = None
+    alpha = 0.5
     if request.method == 'POST':
         # Check if a file was uploaded
         if 'file' not in request.files:
             return render_template('index.html', error='No file uploaded')
 
         file = request.files['file']
+        alpha = float(request.form.get('alpha'))
+        print(alpha)
 
         # Check if the file is an image
         if file.filename == '':
@@ -70,7 +73,8 @@ def home():
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
             # Apply AGCWD enhancement
-            enhanced_image = agcwd(img)
+            print(1)
+            enhanced_image = agcwd(img, alpha)
 
             # Save the enhanced image temporarily
             _, input_image_b64 = cv2.imencode('.png', img)
@@ -79,7 +83,7 @@ def home():
             input_image_b64 = base64.b64encode(input_image_b64).decode('utf-8')
             enhanced_image_b64 = base64.b64encode(enhanced_image_b64).decode('utf-8')
             
-    return render_template('index.html', input_image=input_image_b64, enhanced_image=enhanced_image_b64)
+    return render_template('index.html', input_image=input_image_b64, enhanced_image=enhanced_image_b64, alpha=alpha)
 
 if __name__ == '__main__':
      app.run(debug=True)
