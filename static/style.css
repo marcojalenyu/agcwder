@@ -11,9 +11,14 @@
 }
 
 .img-container {
-    max-width: 500px;
-    max-height: 350px;
-    overflow: hidden;
-    text-align: center; 
-    margin-inline: auto;
+    height: 350px;
+    width: 100%;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    object-fit: fill;
 }

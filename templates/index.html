@@ -11,14 +11,14 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark font-weight-bold flex">
         <a class="navbar-brand" href="/">AGCWDer</a>
     </nav>
-    <div class="website-desc d-flex font-weight-bold mb-1">Upload, Enhance Contrast, & Download!</div>
+    <div class="website-desc d-flex font-weight-bold h4 mb-1">Upload, Enhance Contrast, & Download!</div>
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center mb-4">
                 <div class="mb-4 font-weight-bold h4">Input Image</div>
                 <form class="d-flex flex-column justify-content" action="/" method="post" enctype="multipart/form-data">
                     <div class="img-container">
-                        <img class="img-fluid" id="imgPreview" src="data:image/png;base64,{{ input_image }}" alt="">
+                        <img id="imgPreview" src="data:image/png;base64,{{ input_image }}" alt="">
                     </div>
                     <input class="mx-auto my-3" id="imgInput" type="file" name="file" accept="image/*" placeholder="image" required>
                     <div class="d-flex mx-auto">
@@ -32,7 +32,7 @@
                 <div class="d-flex flex-column mb-4">
                     <div class="img-container">
                         {% if enhanced_image %}
-                            <img class="img-fluid" id="outputImage" src="data:image/png;base64,{{ enhanced_image }}" alt="">
+                            <img id="outputImage" src="data:image/png;base64,{{ enhanced_image }}" alt="">
                         {% endif %}
                     </div>
                     <div class="mt-3">
@@ -58,7 +58,7 @@
         <div class="h4">About:</div>
         <ul>
             <li>The output image is a preview. Click the "Download" button to download the full image.</li>
-            <li>The output image is enhanced using the <a href="https://ieeexplore.ieee.org/abstract/document/6336819">Adaptive Gamma Correction with Weighting Distribution (AGCWD)</a> algorithm by Shih-Chia Huang, Fan-Chieh Cheng, & Yi-Sheng Chiu.</li>
+            <li>The algorithm used is <a href="https://ieeexplore.ieee.org/abstract/document/6336819">Adaptive Gamma Correction with Weighting Distribution (AGCWD)</a> algorithm by Shih-Chia Huang, Fan-Chieh Cheng, & Yi-Sheng Chiu.</li>
             <li>The implementation of AGCWD is from: <a href="https://github.com/qyou/AGCWD/">https://github.com/qyou/AGCWD/</a></li>
         </ul>
     </div>
