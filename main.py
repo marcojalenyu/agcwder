@@ -61,7 +61,6 @@ def home():
 
         file = request.files['file']
         alpha = float(request.form.get('alpha'))
-        print(alpha)
 
         # Check if the file is an image
         if file.filename == '':
@@ -73,7 +72,6 @@ def home():
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
             # Apply AGCWD enhancement
-            print(1)
             enhanced_image = agcwd(img, alpha)
 
             # Save the enhanced image temporarily
