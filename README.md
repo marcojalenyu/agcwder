@@ -1,4 +1,4 @@
-# digimap-project
+# AGCWDer
 Web application implementation of Efficient Contrast Enhancement Using Adaptive Gamma Correction With Weighting Distribution (AGCWD).
 
 URL here: https://agcwder.onrender.com/
