@@ -1,11 +1,9 @@
-from flask import Flask, render_template, request, send_file
+from flask import render_template, request
 import cv2
-import os
 import numpy as np
 import base64
 
-app = Flask(__name__)
-app.secret_key = os.urandom(24).hex()
+from app import app
 
 # AGCWD algorithm function
 def agcwd(image, w):
@@ -82,7 +80,3 @@ def home():
             enhanced_image_b64 = base64.b64encode(enhanced_image_b64).decode('utf-8')
             
     return render_template('index.html', input_image=input_image_b64, enhanced_image=enhanced_image_b64, alpha=alpha)
-
-if __name__ == '__main__':
-     app.run(debug=True)
-
