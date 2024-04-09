@@ -13,7 +13,6 @@
 .img-container {
     height: 350px;
     width: 100%;
-    border: 1px solid #ccc;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,4 +25,12 @@ img {
 
 footer {
     font-size: 0.9em;
+}
+
+.background-main {
+    background-color: #252525;
+}
+
+.background-lightgrey {
+    background-color: #f8f8f8;
 }

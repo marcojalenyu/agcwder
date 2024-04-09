@@ -70,6 +70,7 @@ document.getElementById('imgInput').addEventListener('change', function() {
         if (outputImg != null) {
             outputImg.remove();
             document.getElementById('download-btn').remove();
+            document.querySelector('.img-container').classList.add('d-none');
         }
     };
     reader.readAsDataURL(file);
