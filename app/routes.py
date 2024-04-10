@@ -5,6 +5,9 @@ import base64
 
 from app import app
 
+"""
+The AGCWD algorithm is taken from https://github.com/qyou/AGCWD/
+"""
 # AGCWD algorithm function
 def agcwd(image, w):
     is_colorful = len(image.shape) >= 3

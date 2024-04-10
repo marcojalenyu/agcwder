@@ -15,7 +15,6 @@ window.onload = function() {
 }
 
 function resizeImg() {
-    console.log("Resizing image");
     var inputImg = document.getElementById('imgPreview');
     var outputImg = document.getElementById('outputImage');
     // Get ratio of image and set width and height accordingly
@@ -70,7 +69,7 @@ document.getElementById('imgInput').addEventListener('change', function() {
         if (outputImg != null) {
             outputImg.remove();
             document.getElementById('download-btn').remove();
-            document.querySelector('.img-container').classList.add('d-none');
+            document.querySelector('.img-container-2').classList.add('d-none');
         }
     };
     reader.readAsDataURL(file);
