@@ -81,5 +81,5 @@ def home():
 
             input_image_b64 = base64.b64encode(input_image_b64).decode('utf-8')
             enhanced_image_b64 = base64.b64encode(enhanced_image_b64).decode('utf-8')
-            
+    
     return render_template('index.html', input_image=input_image_b64, enhanced_image=enhanced_image_b64, alpha=alpha)
