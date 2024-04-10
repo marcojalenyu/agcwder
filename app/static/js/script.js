@@ -80,3 +80,25 @@ const alphaValue = document.getElementById('alphaValue');
 alphaInput.addEventListener('input', function() {
    alphaValue.textContent = alphaInput.value;
 });
+
+document.getElementById('sampleImage').addEventListener('change', function() {
+    if (this.checked) {
+        // Show the sample image
+        var sampleImage = new Image();
+        sampleImage.src = '../static/img/sample_image.png'; // Update with your sample image path
+        sampleImage.onload = function() {
+            var inputPreview = document.getElementById('imgPreview');
+            inputPreview.src = sampleImage.src;
+
+            document.getElementById('imgInput').remove();
+
+            // Clear the previous enhanced image and download button
+            var outputImg = document.getElementById('outputImage')
+            if (outputImg != null) {
+                outputImg.remove();
+                document.getElementById('download-btn').remove();
+                document.querySelector('.img-container-2').classList.add('d-none');
+            }
+        };
+    }
+});

@@ -56,30 +56,48 @@ def home():
     enhanced_image_b64 = None
     alpha = 0.5
     if request.method == 'POST':
-        # Check if a file was uploaded
-        if 'file' not in request.files:
-            return render_template('index.html', error='No file uploaded')
 
-        file = request.files['file']
-        alpha = float(request.form.get('alpha'))
-
-        # Check if the file is an image
-        if file.filename == '':
-            return render_template('index.html', error='No selected file')
-
-        if file:
-            # Read the uploaded image
-            nparr = np.frombuffer(file.read(), np.uint8)
-            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        if request.form.get('imageType') == 'sample':
+            # Read the sample image
+            img = cv2.imread('app/static/img/sample_image.png', cv2.IMREAD_COLOR)
 
             # Apply AGCWD enhancement
             enhanced_image = agcwd(img, alpha)
 
             # Save the enhanced image temporarily
-            _, input_image_b64 = cv2.imencode('.png', img)
             _, enhanced_image_b64 = cv2.imencode('.png', enhanced_image)
-
-            input_image_b64 = base64.b64encode(input_image_b64).decode('utf-8')
             enhanced_image_b64 = base64.b64encode(enhanced_image_b64).decode('utf-8')
+            
+            _, input_image_b64 = cv2.imencode('.png', img)
+            input_image_b64 = base64.b64encode(input_image_b64).decode('utf-8')
+    
+            return render_template('index.html', input_image=input_image_b64, enhanced_image=enhanced_image_b64, alpha=alpha)
+        
+        else:
+            # Check if a file was uploaded
+            if 'file' not in request.files:
+                return render_template('index.html', error='No file uploaded')
+
+            file = request.files['file']
+            alpha = float(request.form.get('alpha'))
+
+            # Check if the file is an image
+            if file.filename == '':
+                return render_template('index.html', error='No selected file')
+
+            if file:
+                # Read the uploaded image
+                nparr = np.frombuffer(file.read(), np.uint8)
+                img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+                # Apply AGCWD enhancement
+                enhanced_image = agcwd(img, alpha)
+
+                # Save the enhanced image temporarily
+                _, input_image_b64 = cv2.imencode('.png', img)
+                _, enhanced_image_b64 = cv2.imencode('.png', enhanced_image)
+
+                input_image_b64 = base64.b64encode(input_image_b64).decode('utf-8')
+                enhanced_image_b64 = base64.b64encode(enhanced_image_b64).decode('utf-8')
     
     return render_template('index.html', input_image=input_image_b64, enhanced_image=enhanced_image_b64, alpha=alpha)
