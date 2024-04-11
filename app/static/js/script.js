@@ -100,5 +100,7 @@ document.getElementById('sampleImage').addEventListener('change', function() {
                 document.querySelector('.img-container-2').classList.add('d-none');
             }
         };
+    } else {
+        window.location.reload();
     }
 });

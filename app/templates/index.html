@@ -26,11 +26,9 @@
                         <form class="d-flex flex-column justify-content" action="/" method="post" enctype="multipart/form-data">
                             <input class="form-control my-3" id="imgInput" type="file" name="file" accept="image/*" placeholder="image" required>
                             <div class="row">
-                                <div class="col-auto">
-                                    <input type="radio" id="sampleImage" name="imageType" value="sample">
-                                </div>
-                                <div class="col-auto">
-                                    <label for="sampleImage">Use Sample Image</label>
+                                <div class="col-auto px-3">
+                                    <input type="checkbox" id="sampleImage" name="imageType" value="sample">
+                                    <label for="sampleImage" class="mx-2">Use Sample Image</label>
                                 </div>
                             </div>
                             <label for="alpha" class="custom-label font-weight-bold">&#945; = <span id="alphaValue">{{ alpha }}</span></label>
