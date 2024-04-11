@@ -62,6 +62,7 @@ def home():
             img = cv2.imread('app/static/img/sample_image.png', cv2.IMREAD_COLOR)
 
             # Apply AGCWD enhancement
+            alpha = float(request.form.get('alpha'))
             enhanced_image = agcwd(img, alpha)
 
             # Save the enhanced image temporarily
